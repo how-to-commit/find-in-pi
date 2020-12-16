@@ -1,10 +1,9 @@
 import logic
-import gui
 
 
 while True:
     d_find = input("Enter a string of numbers you want to find in Pi: ")
-    while not (logic.verifyInput(d_find) or d_find < 0):
+    while not (logic.verifyInput(d_find) and int(d_find) > 0):
         d_find = input("WARN: Enter positive numbers only.\nEnter a string of numbers you want to find in Pi: ")
 
     depth = input("Enter desired search depth (leave blank for default value or -1 to disable): ")

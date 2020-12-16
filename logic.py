@@ -19,8 +19,8 @@ def cleanListToStr(lst):
 def match(pattern, text):
     """Checks whether pattern is in text as a substring or a sublist
     pattern and text are both allowed to be either string or list."""
-    cleanListToStr(pattern)
-    cleanListToStr(text)
+    pattern = cleanListToStr(pattern)
+    text = cleanListToStr(text)
     return pattern in text
 
 
@@ -33,24 +33,28 @@ def verifyInput(number):
         return False
 
 
-def search(number, depth=-1):
+def search(d_find, depth=-1):
     """Searches for passed in number in Pi."""
     counter = 0
     d_buffer = []
+    depth = int(depth)
 
-    while not (depth = 0):
-        depth -= 1
-        counter += 1
+    for digit in piGenerator():
 
-        for digit in piGenerator():
+        if not (depth == 0):
+            counter += 1
+            depth -= 1
+
             d_buffer.append(digit)
             if match(d_find, d_buffer):
-                position = counter - len(number)
+                position = counter - len(d_find)
                 return (True, position)
 
             # purge useless digit from buffer to prevent slowdown at larger numbers
             if len(d_buffer) > len(d_find):
                 d_buffer.pop(0)
+            
 
-    # Exit, could not find number within search depth
+
+        # Exit, could not find number within search depth
     return False
